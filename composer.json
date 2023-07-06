@@ -1,0 +1,40 @@
+{
+  "name": "cmixin/season",
+  "description": "Carbon mixin to handle business days and opening hours",
+  "type": "library",
+  "require": {
+    "php": ">=8.2"
+  },
+  "require-dev": {
+    "nesbot/carbon": "^2.68.1",
+    "phpunit/phpunit": "^10.2.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "KyleKatarn",
+      "email": "carbon@selfbuild.fr"
+    }
+  ],
+  "minimum-stability": "dev",
+  "scripts": {
+    "types": "php types.php"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Season\\Laravel\\ServiceProvider"
+      ]
+    }
+  }
+}
