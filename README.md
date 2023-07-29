@@ -110,7 +110,7 @@ globally for `Carbon`, you can remove it from auto-discovery using:
 },
 ```
 
-## Configuration
+## Customize days
 
 By default, `Season` is created with the following config:
 ```php
