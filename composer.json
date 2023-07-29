@@ -3,7 +3,8 @@
   "description": "Carbon mixin to handle business days and opening hours",
   "type": "library",
   "require": {
-    "php": ">=8.2"
+    "php": ">=8.2",
+    "psr/container": "2.0.x-dev"
   },
   "require-dev": {
     "nesbot/carbon": "^2.68.1",

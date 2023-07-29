@@ -6,15 +6,13 @@ use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Closure;
 use Cmixin\SeasonMixin;
-use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Date;
-use Season\Season;
 
 /**
  * @property Application $app
  */
-class ServiceProvider extends \Illuminate\Support\ServiceProvider implements DeferrableProvider
+class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function boot(): void
     {
@@ -31,25 +29,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider implements Def
                 $carbonClass::setSeasonConfig($seasonConfig);
             }
         }
-    }
-
-    public function register(): void
-    {
-        $seasonConfig = $this->getConfig();
-
-        if (!($seasonConfig['service'] ?? true)) {
-            return;
-        }
-
-        $this->app->singleton(
-            Season::class,
-            fn () => new Season($this->proceedConfig($seasonConfig)),
-        );
-    }
-
-    public function provides(): array
-    {
-        return [Season::class];
     }
 
     private function proceedConfig(mixed $config): mixed
@@ -81,7 +60,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider implements Def
                 $carbonConfig['season'] ??
                 $carbonConfig['seasons'] ??
                 $this->proceedConfig($config->get('seasons')) ??
-                []
+                [],
             )
             : [];
     }

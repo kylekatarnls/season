@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Season;
 
+use ArrayAccess;
 use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
+use Psr\Container\ContainerInterface;
 
 final class Season
 {
@@ -15,7 +17,7 @@ final class Season
     public const FALL = SeasonEnum::FALL;
     public const WINTER = SeasonEnum::WINTER;
 
-    private readonly array $config;
+    private readonly ArrayAccess|array $config;
 
     private const DEFAULT_CONFIG = [
         3 => 20, // spring
@@ -24,8 +26,22 @@ final class Season
         12 => 21, // winter
     ];
 
-    public function __construct(?array $config = null)
+    public function __construct(?array $config = null, ?ContainerInterface $container = null)
     {
+        if (!$config && $container?->has('config')) {
+            $configService = $container->get('config');
+
+            if (is_array($configService) || $configService instanceof ArrayAccess) {
+                $config = $configService['season'] ?? null;
+            } elseif (is_object($configService) && method_exists($configService, 'get')) {
+                $config = $configService->get('season');
+
+                if (!is_array($config) && !($config instanceof ArrayAccess)) {
+                    $config = null;
+                }
+            }
+        }
+
         $this->config = $config ?: self::DEFAULT_CONFIG;
     }
 

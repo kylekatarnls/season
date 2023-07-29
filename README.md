@@ -85,9 +85,8 @@ their subclasses.
 
 ## Disable
 
-If you use Laravel but don't want neither to enable `Season` mixin
-globally nor to inject the service, you can remove it from
-auto-discovery using:
+If you use Laravel but don't want to enable `Season` mixin
+globally for `Carbon`, you can remove it from auto-discovery using:
 
 ```json
 "extra": {
@@ -121,35 +120,13 @@ argument:
 [Injecting Services/Config into a Service](https://symfony.com/doc/current/service_container.html#manually-wiring-arguments)
 
 If you use the Carbon mixin with Laravel, you can set the config
-in **config/carbon.php**:
+in **config/season.php**:
 
 ```php
 <?php return [
-    'seasons' => [
-        3 => 21, // spring
-        6 => 21, // summer
-        9 => 21, // fall
-        12 => 21, // winter
-    ],
-];
-```
-
-`Season` as a service can be disabled so only mixin is loaded:
-
-```php
-<?php return [
-    'seasons' => [
-        'service' => false,
-    ],
-];
-```
-
-And mixin can be disabled if you want to use only the service:
-
-```php
-<?php return [
-    'seasons' => [
-        'mixin' => false,
-    ],
+    3 => 21, // spring
+    6 => 21, // summer
+    9 => 21, // fall
+    12 => 21, // winter
 ];
 ```
