@@ -17,42 +17,42 @@ class SeasonTest extends TestCase
     public function testTimezone(): void
     {
         $dateClass = static::DATE_CLASS;
-        self::assertTrue((new Season)->isInSummer(new $dateClass('2022-06-21 02:30', new DateTimeZone('Asia/Tokyo'))));
-        self::assertTrue((new Season)->isInSummer(new $dateClass('2022-06-21 02:30', new DateTimeZone('America/Los_Angeles'))));
-        self::assertTrue((new Season)->isInSummer('2022-06-21 02:30'));
+        self::assertTrue((new Season())->isInSummer(new $dateClass('2022-06-21 02:30', new DateTimeZone('Asia/Tokyo'))));
+        self::assertTrue((new Season())->isInSummer(new $dateClass('2022-06-21 02:30', new DateTimeZone('America/Los_Angeles'))));
+        self::assertTrue((new Season())->isInSummer('2022-06-21 02:30'));
         self::assertSame(
             '2022-03-20 00:00:00.000000 America/Los_Angeles',
-            (new Season)->startOfSeason(new $dateClass('2022-06-21 02:30', new DateTimeZone('Asia/Tokyo')), 'America/Los_Angeles')
+            (new Season())->startOfSeason(new $dateClass('2022-06-21 02:30', new DateTimeZone('Asia/Tokyo')), 'America/Los_Angeles')
                 ->format('Y-m-d H:i:s.u e'),
         );
         self::assertSame(
             '2022-06-21 00:00:00.000000 Asia/Tokyo',
-            (new Season)->startOfSeason(new $dateClass('2022-06-21 02:30', new DateTimeZone('America/Los_Angeles')), 'Asia/Tokyo')
+            (new Season())->startOfSeason(new $dateClass('2022-06-21 02:30', new DateTimeZone('America/Los_Angeles')), 'Asia/Tokyo')
                 ->format('Y-m-d H:i:s.u e'),
         );
         self::assertSame(
             '2022-06-21 00:00:00.000000 UTC',
-            (new Season)->startOfSeason('2022-06-21 02:30')
+            (new Season())->startOfSeason('2022-06-21 02:30')
                 ->format('Y-m-d H:i:s.u e'),
         );
         self::assertSame(
             '2022-06-21 00:00:00.000000 Asia/Tokyo',
-            (new Season)->startOfSeason('2022-06-21 02:30', 'Asia/Tokyo')
+            (new Season())->startOfSeason('2022-06-21 02:30', 'Asia/Tokyo')
                 ->format('Y-m-d H:i:s.u e'),
         );
         self::assertSame(
             '2022-06-21 00:00:00.000000 America/Los_Angeles',
-            (new Season)->startOfSeason('2022-06-21 02:30', 'America/Los_Angeles')
+            (new Season())->startOfSeason('2022-06-21 02:30', 'America/Los_Angeles')
                 ->format('Y-m-d H:i:s.u e'),
         );
         self::assertSame(
             '2022-06-21 00:00:00.000000 America/Los_Angeles',
-            (new Season)->startOfSeason('2022-06-21 02:30 America/Los_Angeles', 'Asia/Tokyo')
+            (new Season())->startOfSeason('2022-06-21 02:30 America/Los_Angeles', 'Asia/Tokyo')
                 ->format('Y-m-d H:i:s.u e'),
         );
         self::assertSame(
             '2022-06-21 00:00:00.000000 Asia/Tokyo',
-            (new Season)->startOfSeason('2022-06-21 02:30 Asia/Tokyo', 'America/Los_Angeles')
+            (new Season())->startOfSeason('2022-06-21 02:30 Asia/Tokyo', 'America/Los_Angeles')
                 ->format('Y-m-d H:i:s.u e'),
         );
     }
