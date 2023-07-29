@@ -4,7 +4,7 @@
 [![GitHub Actions](https://github.com/kylekatarnls/business-time/workflows/Tests/badge.svg)](https://github.com/kylekatarnls/season/actions)
 [![Code Climate](https://codeclimate.com/github/kylekatarnls/season/badges/gpa.svg)](https://codeclimate.com/github/kylekatarnls/season)
 [![Test Coverage](https://codeclimate.com/github/kylekatarnls/season/badges/coverage.svg)](https://codeclimate.com/github/kylekatarnls/season/coverage)
-[![StyleCI](https://styleci.io/repos/655239407/shield?branch=master&style=flat)](https://styleci.io/repos/655239407)
+[![StyleCI](https://styleci.io/repos/655239407/shield?branch=main&style=flat)](https://styleci.io/repos/655239407)
 
 `DateTime` modifiers such as `startOfSeason`, `isInSummer`
 
@@ -59,18 +59,24 @@ class ProductController
 }
 ```
 
-With Laravel it will be provided by default, With Symfony, you'll
-have to register `\Season\Season` as a service, see
-[Configuring Services in the Container](https://symfony.com/doc/current/service_container.html#creating-configuring-services-in-the-container)
+With Laravel it will be provided by default.
 
+With Symfony, you'll have to register `\Season\Season` as a service and
+so edit **config/services.yaml** the following way:
+```yaml
+services:
+    _defaults:
+        # ensure you get the tag 'controller.service_arguments'
+        # if you need services to be available as controller
+        # methods arguments:
+        tags: [ 'controller.service_arguments' ]
 
-```php
-use Season\Season;
-
-$season = new Season();
-$season->isInSummer('2022-06-25');
-$season->isInSummer(new DateTimeImmutable('2022-06-25'));
+    # then add the class name as a service
+    Season\Season:
 ```
+
+Learn more from Symfony documentation:
+[Configuring Services in the Container](https://symfony.com/doc/current/service_container.html#creating-configuring-services-in-the-container)
 
 ## As Carbon methods (mixin)
 
@@ -87,9 +93,9 @@ Carbon::parse('2022-06-25')->isInSummer();
 You can use mixin on `CarbonImmutable`, `Carbon` or any of
 their subclasses.
 
-# Laravel
+# Configuration
 
-## Disable
+## Disable mixin in Laravel
 
 If you use Laravel but don't want to enable `Season` mixin
 globally for `Carbon`, you can remove it from auto-discovery using:
@@ -121,12 +127,19 @@ start.
 But you can pass a custom config with other days as long as the keys
 remain.
 
-If you use it as a service with Symfony, you can pass it as an
-argument:
-[Injecting Services/Config into a Service](https://symfony.com/doc/current/service_container.html#manually-wiring-arguments)
+```php
+use Season\Season;
 
-If you use the Carbon mixin with Laravel, you can set the config
-in **config/season.php**:
+$season = new Season([
+    3  => 21, // spring
+    6  => 21, // summer
+    9  => 21, // fall
+    12 => 21, // winter
+]);
+```
+
+In Laravel, you can set the config in **config/season.php** which will
+apply to both the mixin and the service:
 
 ```php
 <?php return [
@@ -137,7 +150,41 @@ in **config/season.php**:
 ];
 ```
 
-## Thanks
+When using `Carbon` mixin alone, you can still call `setSeasonConfig()` to
+change the config globally:
+
+```php
+Carbon::setSeasonConfig([
+    3  => 21, // spring
+    6  => 21, // summer
+    9  => 21, // fall
+    12 => 21, // winter
+]);
+```
+
+Or apply a config on specific call:
+```php
+echo Carbon::now()->getSeason([
+    3  => 21, // spring
+    6  => 21, // summer
+    9  => 21, // fall
+    12 => 21, // winter
+])->getName();
+```
+
+With Symfony you can edit **config/services.yaml** to configure the service:
+```yaml
+services:
+    Season\Season:
+        arguments:
+            $config:
+                3: 20
+                6: 12
+                9: 22
+                12: 21
+```
+
+# Thanks
 
 <a href="https://tidelift.com/subscription/pkg/packagist-nesbot-carbon?utm_source=packagist-nesbot-carbon&utm_medium=referral&utm_campaign=readme" target="_blank"><img src="https://carbon.nesbot.com/tidelift-brand.png" width="256" height="64"></a>
 
