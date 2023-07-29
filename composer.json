@@ -4,7 +4,7 @@
   "type": "library",
   "require": {
     "php": ">=8.2",
-    "psr/container": "2.0.x-dev"
+    "psr/container": "*"
   },
   "require-dev": {
     "nesbot/carbon": "^2.68.1",
