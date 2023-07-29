@@ -12,7 +12,7 @@ class ServiceProviderTest extends TestCase
 {
     protected function tearDown(): void
     {
-        (new class () {
+        (new class() {
             use SeasonMixin;
         })->setSeasonConfig(null);
 
@@ -21,8 +21,8 @@ class ServiceProviderTest extends TestCase
 
     public function testBoot(): void
     {
-        include_once __DIR__.'/DeferrableProvider.php';
-        include_once __DIR__.'/ServiceProvider.php';
+        include_once __DIR__ . '/DeferrableProvider.php';
+        include_once __DIR__ . '/ServiceProvider.php';
         $service = new ServiceProvider();
         $message = null;
 
@@ -43,8 +43,8 @@ class ServiceProviderTest extends TestCase
 
     public function testConfig(): void
     {
-        include_once __DIR__.'/DeferrableProvider.php';
-        include_once __DIR__.'/ServiceProvider.php';
+        include_once __DIR__ . '/DeferrableProvider.php';
+        include_once __DIR__ . '/ServiceProvider.php';
         $service = new ServiceProvider();
         $classes = [
             Carbon::class,

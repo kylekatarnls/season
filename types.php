@@ -119,5 +119,5 @@ $typeGenerator = new TypeGenerator();
 
 $typeGenerator->writeHelpers([
     'instantiated' => '',
-    'static' => ' static',
+    'static'       => ' static',
 ]);
