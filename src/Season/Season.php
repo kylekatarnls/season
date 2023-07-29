@@ -26,7 +26,7 @@ final class Season
 
     public function __construct(?array $config = null)
     {
-        $this->config = $config ?? self::DEFAULT_CONFIG;
+        $this->config = $config ?: self::DEFAULT_CONFIG;
     }
 
     /**
