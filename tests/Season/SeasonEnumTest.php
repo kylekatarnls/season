@@ -30,6 +30,7 @@ class SeasonEnumTest extends TestCase
         self::assertSame('fall', SeasonEnum::FALL->getName());
         self::assertSame('winter', SeasonEnum::WINTER->getName());
     }
+
     public function testGetStartMonth(): void
     {
         self::assertSame(3, SeasonEnum::SPRING->getStartMonth());

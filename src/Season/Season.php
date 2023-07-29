@@ -20,9 +20,9 @@ final class Season
     private readonly ArrayAccess|array $config;
 
     private const DEFAULT_CONFIG = [
-        3 => 20, // spring
-        6 => 21, // summer
-        9 => 22, // fall
+        3  => 20, // spring
+        6  => 21, // summer
+        9  => 22, // fall
         12 => 21, // winter
     ];
 

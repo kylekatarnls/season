@@ -26,22 +26,21 @@ class TypeGenerator
                 ));
 
                 if ($index) {
-                    $content .= "\n\n        ";
+                    $content .= "\n\n    ";
                 }
 
-                $content .= "public$prefix function $method($arguments): static\n        {\n            // Content: see $file:$line\n        }";
+                $content .= "public$prefix function $method($arguments): static\n    {\n        // Content: see $file:$line\n    }";
             }
 
             file_put_contents(__DIR__ . "/types/_ide_season_$name.php", "<?php
 
 declare(strict_types=1);
 
-namespace Carbon
+namespace Carbon;
+
+class Carbon
 {
-    class Carbon
-    {
-        $content
-    }
+    $content
 }
 ");
         }

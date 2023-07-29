@@ -109,9 +109,9 @@ globally for `Carbon`, you can remove it from auto-discovery using:
 By default, `Season` is created with the following config:
 ```php
 [
-    3 => 20, // spring
-    6 => 21, // summer
-    9 => 22, // fall
+    3  => 20, // spring
+    6  => 21, // summer
+    9  => 22, // fall
     12 => 21, // winter
 ]
 ```
@@ -130,9 +130,9 @@ in **config/season.php**:
 
 ```php
 <?php return [
-    3 => 21, // spring
-    6 => 21, // summer
-    9 => 21, // fall
+    3  => 21, // spring
+    6  => 21, // summer
+    9  => 21, // fall
     12 => 21, // winter
 ];
 ```

@@ -54,9 +54,9 @@ class ServiceProviderTest extends TestCase
         Carbon::macro('getSeason', null);
 
         $service->app->setSeasonsConfig([
-            3 => 22, // spring
-            6 => 21, // summer
-            9 => 22, // fall
+            3  => 22, // spring
+            6  => 21, // summer
+            9  => 22, // fall
             12 => 21, // winter
         ]);
         $service->boot();
