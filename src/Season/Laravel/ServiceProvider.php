@@ -43,7 +43,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider implements Def
 
         $this->app->singleton(
             Season::class,
-            static fn () => new Season($this->proceedConfig($seasonConfig)),
+            fn () => new Season($this->proceedConfig($seasonConfig)),
         );
     }
 
