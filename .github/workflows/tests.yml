@@ -40,16 +40,6 @@ jobs:
       if: steps.composer-cache.outputs.cache-hit != 'true'
       run: composer update --prefer-dist ${{ matrix.setup != 'next' && format('--prefer-{0}', matrix.setup) || '' }} --no-progress --no-suggest
 
-    - name: Code Climate Test Reporter
-      if: matrix.php == '8.3' && matrix.setup == 'stable'
-      uses: aktions/codeclimate-test-reporter@v1
-      with:
-        codeclimate-test-reporter-id: ${{ secrets.CC_TEST_REPORTER_ID }}
-        command: after-build -t clover
-      env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-      continue-on-error: true
-
     - name: Run test suite
       run: |
         if [[ ${MATRIX_CONFIG} == "8.3-stable" ]]; then
@@ -62,10 +52,14 @@ jobs:
 
     - name: Code Climate Test Reporter
       if: matrix.php == '8.3' && matrix.setup == 'stable'
-      run: ./cc-test-reporter after-build --exit-code 0;
+      uses: aktions/codeclimate-test-reporter@v1
+      with:
+        codeclimate-test-reporter-id: ${{ secrets.CC_TEST_REPORTER_ID }}
+        command: after-build -t clover
       env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+      continue-on-error: true
 
     - name: Coverage
       if: matrix.php == '8.3' && matrix.setup == 'stable'
-      run: bash <(curl -s https://codecov.io/bash);
+      uses: codecov/codecov-action@v1
