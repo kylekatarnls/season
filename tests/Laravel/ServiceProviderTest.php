@@ -60,7 +60,6 @@ class ServiceProviderTest extends TestCase
             12 => 21, // winter
         ]);
         $service->boot();
-        $service->register();
 
         foreach ($classes as $class) {
             $this->assertSame('winter', $class::parse('2022-03-21')->getSeason()->getName());

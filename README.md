@@ -1,5 +1,11 @@
 # Season
 
+[![Latest Stable Version](https://poser.pugx.org/cmixin/season/v/stable.png)](https://packagist.org/packages/cmixin/season)
+[![GitHub Actions](https://github.com/kylekatarnls/business-time/workflows/Tests/badge.svg)](https://github.com/kylekatarnls/season/actions)
+[![Code Climate](https://codeclimate.com/github/kylekatarnls/season/badges/gpa.svg)](https://codeclimate.com/github/kylekatarnls/season)
+[![Test Coverage](https://codeclimate.com/github/kylekatarnls/season/badges/coverage.svg)](https://codeclimate.com/github/kylekatarnls/season/coverage)
+[![StyleCI](https://styleci.io/repos/655239407/shield?branch=master&style=flat)](https://styleci.io/repos/655239407)
+
 `DateTime` modifiers such as `startOfSeason`, `isInSummer`
 
 - `Season` can be used as a service which can work with any `DateTime` or `DateTimeImmutable` object or date strings
@@ -130,3 +136,9 @@ in **config/season.php**:
     12 => 21, // winter
 ];
 ```
+
+## Thanks
+
+<a href="https://tidelift.com/subscription/pkg/packagist-nesbot-carbon?utm_source=packagist-nesbot-carbon&utm_medium=referral&utm_campaign=readme" target="_blank"><img src="https://carbon.nesbot.com/tidelift-brand.png" width="256" height="64"></a>
+
+<a href="https://www.jetbrains.com/phpstorm/" target="_blank"><img src="http://jet-brains.selfbuild.fr/PhpStorm-text.svg" width="256" height="64"></a>

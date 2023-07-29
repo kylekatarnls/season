@@ -11,6 +11,11 @@ class App
         };
     }
 
+    public function has($name)
+    {
+        return in_array($name, ['config', 'season'], true);
+    }
+
     public function setSeasonsConfig($seasons): void
     {
         $this->seasons = $seasons;

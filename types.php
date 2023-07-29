@@ -69,14 +69,9 @@ namespace Carbon
         }
 
         if ($parameter->getType()) {
-            $name = $parameter->getType()->getName();
-
-            if (preg_match('/^[A-Z]/', $name)) {
-                $name = "\\$name";
-            }
-
-            $name = preg_replace('/^\\\\Carbon\\\\/', '', $name);
-            $output = ($parameter->isOptional() ? '?' : '') . "$name $output";
+            $type = $parameter->getType();
+            $name = $this->getTypeName($type);
+            $output = ($parameter->isOptional() && !($type instanceof ReflectionUnionType) && !($type instanceof ReflectionIntersectionType) ? '?' : '') . "$name $output";
         }
 
         try {
@@ -88,6 +83,36 @@ namespace Carbon
         }
 
         return $output;
+    }
+
+    protected function getInnerTypeName(ReflectionType $type): string
+    {
+        return $this->getTypeName($type, '(', ')');
+    }
+
+    protected function getTypeName(ReflectionType $type, string $start = '', string $end = ''): string
+    {
+        if ($type instanceof ReflectionIntersectionType) {
+            return $start . implode('&', array_map(
+                $this->getInnerTypeName(...),
+                $type->getTypes(),
+            )) . $end;
+        }
+
+        if ($type instanceof ReflectionUnionType) {
+            return $start . implode('|', array_map(
+                $this->getInnerTypeName(...),
+                $type->getTypes(),
+            )) . $end;
+        }
+
+        $name = $type->getName();
+
+        if (preg_match('/^[A-Z]/', $name)) {
+            $name = "\\$name";
+        }
+
+        return preg_replace('/^\\\\Carbon\\\\/', '', $name);
     }
 }
 

@@ -2,14 +2,15 @@
 
 namespace Cmixin;
 
+use ArrayAccess;
 use Season\Season;
 use Season\SeasonEnum;
 
 trait SeasonMixin
 {
-    private static ?array $defaultSeasonConfig = null;
+    private static ArrayAccess|array|null $defaultSeasonConfig = null;
 
-    public function setSeasonConfig(?array $config): void
+    public function setSeasonConfig(ArrayAccess|array|null $config): void
     {
         static::$defaultSeasonConfig = $config;
     }
@@ -17,7 +18,7 @@ trait SeasonMixin
     /**
      * Return the season of the current date.
      */
-    public function getSeason(?array $config = null): SeasonEnum
+    public function getSeason(ArrayAccess|array|null $config = null): SeasonEnum
     {
         return (new Season($config ?? static::$defaultSeasonConfig))->getSeason($this);
     }
@@ -25,7 +26,7 @@ trait SeasonMixin
     /**
      * Return either current date is in spring.
      */
-    public function isInSpring(?array $config = null): bool
+    public function isInSpring(ArrayAccess|array|null $config = null): bool
     {
         return (new Season($config ?? static::$defaultSeasonConfig))->isInSpring($this);
     }
@@ -33,7 +34,7 @@ trait SeasonMixin
     /**
      * Return either current date is in summer.
      */
-    public function isInSummer(?array $config = null): bool
+    public function isInSummer(ArrayAccess|array|null $config = null): bool
     {
         return (new Season($config ?? static::$defaultSeasonConfig))->isInSummer($this);
     }
@@ -41,7 +42,7 @@ trait SeasonMixin
     /**
      * Return either current date is in fall.
      */
-    public function isInFall(?array $config = null): bool
+    public function isInFall(ArrayAccess|array|null $config = null): bool
     {
         return (new Season($config ?? static::$defaultSeasonConfig))->isInFall($this);
     }
@@ -49,17 +50,17 @@ trait SeasonMixin
     /**
      * Return either current date is in winter.
      */
-    public function isInWinter(?array $config = null): bool
+    public function isInWinter(ArrayAccess|array|null $config = null): bool
     {
         return (new Season($config ?? static::$defaultSeasonConfig))->isInWinter($this);
     }
 
-    public function startOfSeason(?array $config = null): static
+    public function startOfSeason(ArrayAccess|array|null $config = null): static
     {
         return (new Season($config ?? static::$defaultSeasonConfig))->startOfSeason($this);
     }
 
-    public function endOfSeason(?array $config = null): static
+    public function endOfSeason(ArrayAccess|array|null $config = null): static
     {
         return (new Season($config ?? static::$defaultSeasonConfig))->endOfSeason($this);
     }

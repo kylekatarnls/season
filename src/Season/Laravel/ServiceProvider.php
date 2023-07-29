@@ -2,6 +2,7 @@
 
 namespace Season\Laravel;
 
+use ArrayAccess;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Closure;
@@ -18,10 +19,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         $seasonConfig = $this->getConfig();
 
-        if (!($seasonConfig['mixin'] ?? true)) {
-            return;
-        }
-
         foreach ($this->getCarbonClasses() as $carbonClass) {
             $carbonClass::mixin(SeasonMixin::class);
 
@@ -31,16 +28,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         }
     }
 
-    private function proceedConfig(mixed $config): mixed
-    {
-        if ($config instanceof Closure) {
-            return $config($this->app);
-        }
-
-        return $config;
-    }
-
-    private function getCarbonClasses(): array
+    private function getCarbonClasses(): iterable
     {
         return array_filter([
             Carbon::class,
@@ -50,18 +38,33 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         ], 'class_exists');
     }
 
-    private function getConfig(): array
+    private function getConfig(): ArrayAccess|array
     {
-        $config = $this->app->get('config');
-        $carbonConfig = $this->proceedConfig($config->get('carbon'));
+        $config = $this->getSeasonConfig();
 
-        return is_array($carbonConfig)
-            ? $this->proceedConfig(
-                $carbonConfig['season'] ??
-                $carbonConfig['seasons'] ??
-                $this->proceedConfig($config->get('seasons')) ??
-                [],
-            )
-            : [];
+        if ($config instanceof Closure) {
+            $config = $config($this->app);
+        }
+
+        if (is_array($config) || $config instanceof ArrayAccess) {
+            return $config;
+        }
+
+        return [];
+    }
+
+    private function getSeasonConfig(): mixed
+    {
+        $appConfig = $this->app->get('config');
+
+        if ((is_array($appConfig) || $appConfig instanceof ArrayAccess) && isset($appConfig['season'])) {
+            return $appConfig['season'];
+        }
+
+        if (is_object($appConfig) && method_exists($appConfig, 'has') && $appConfig->has('season')) {
+            return $appConfig->get('season');
+        }
+
+        return null;
     }
 }

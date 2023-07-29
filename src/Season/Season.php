@@ -26,7 +26,7 @@ final class Season
         12 => 21, // winter
     ];
 
-    public function __construct(?array $config = null, ?ContainerInterface $container = null)
+    public function __construct(ArrayAccess|array|null $config = null, ?ContainerInterface $container = null)
     {
         if (!$config && $container?->has('config')) {
             $configService = $container->get('config');

@@ -27,7 +27,7 @@
       "email": "carbon@selfbuild.fr"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "scripts": {
     "types": "php types.php"
   },

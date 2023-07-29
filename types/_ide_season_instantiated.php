@@ -6,44 +6,44 @@ namespace Carbon
 {
     class Carbon
     {
-        public function setSeasonConfig(array $config): static
+        public function setSeasonConfig(\ArrayAccess|array|null $config): static
         {
-            // Content: see /src/Cmixin/SeasonMixin.php:12
+            // Content: see /src/Cmixin/SeasonMixin.php:13
         }
 
-        public function getSeason(): static
+        public function getSeason(\ArrayAccess|array|null $config = null): static
         {
-            // Content: see /src/Cmixin/SeasonMixin.php:20
+            // Content: see /src/Cmixin/SeasonMixin.php:21
         }
 
-        public function isInSpring(): static
+        public function isInSpring(\ArrayAccess|array|null $config = null): static
         {
-            // Content: see /src/Cmixin/SeasonMixin.php:28
+            // Content: see /src/Cmixin/SeasonMixin.php:29
         }
 
-        public function isInSummer(): static
+        public function isInSummer(\ArrayAccess|array|null $config = null): static
         {
-            // Content: see /src/Cmixin/SeasonMixin.php:36
+            // Content: see /src/Cmixin/SeasonMixin.php:37
         }
 
-        public function isInFall(): static
+        public function isInFall(\ArrayAccess|array|null $config = null): static
         {
-            // Content: see /src/Cmixin/SeasonMixin.php:44
+            // Content: see /src/Cmixin/SeasonMixin.php:45
         }
 
-        public function isInWinter(): static
+        public function isInWinter(\ArrayAccess|array|null $config = null): static
         {
-            // Content: see /src/Cmixin/SeasonMixin.php:52
+            // Content: see /src/Cmixin/SeasonMixin.php:53
         }
 
-        public function startOfSeason(?array $config = null): static
+        public function startOfSeason(\ArrayAccess|array|null $config = null): static
         {
-            // Content: see /src/Cmixin/SeasonMixin.php:57
+            // Content: see /src/Cmixin/SeasonMixin.php:58
         }
 
-        public function endOfSeason(?array $config = null): static
+        public function endOfSeason(\ArrayAccess|array|null $config = null): static
         {
-            // Content: see /src/Cmixin/SeasonMixin.php:62
+            // Content: see /src/Cmixin/SeasonMixin.php:63
         }
     }
 }
