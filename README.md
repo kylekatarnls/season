@@ -183,7 +183,3 @@ services:
                 9: 22
                 12: 21
 ```
-
-# Thanks
-
-<a href="https://www.jetbrains.com/phpstorm/" target="_blank"><img src="http://jet-brains.selfbuild.fr/PhpStorm-text.svg" width="256" height="64"></a>
