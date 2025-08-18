@@ -186,6 +186,4 @@ services:
 
 # Thanks
 
-<a href="https://tidelift.com/subscription/pkg/packagist-nesbot-carbon?utm_source=packagist-nesbot-carbon&utm_medium=referral&utm_campaign=readme" target="_blank"><img src="https://carbon.nesbot.com/tidelift-brand.png" width="256" height="64"></a>
-
 <a href="https://www.jetbrains.com/phpstorm/" target="_blank"><img src="http://jet-brains.selfbuild.fr/PhpStorm-text.svg" width="256" height="64"></a>
